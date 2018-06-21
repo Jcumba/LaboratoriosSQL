@@ -72,14 +72,16 @@ FROM sys.views
 
 SELECT Prestamos.fecsalPrestamo,
     CONCAT(Bibliotecario.apeBibliotecario, ',', Bibliotecario.nomBibliotecario) AS 'Bibliotecario',
-    Detalle_Prestamo.Libro_idLibro,
-    Libro.tituloLibro
-FROM Prestamos
+    Libro.tituloLibro,
+    Cliente.nomCliente
+    FROM Prestamos
     INNER JOIN bibliotecario
     ON Prestamos.Bibliotecario_idBibliotecario = Bibliotecario.idBibliotecario
     INNER JOIN Detalle_Prestamo
     ON Prestamos.idPrestamo = Detalle_Prestamo.Prestamos_idPrestamo
     INNER JOIN Libro
     ON Detalle_Prestamo.Libro_idLibro = Libro.idLibro
+    INNER JOIN Cliente
+    ON Prestamos.Cliente_idCliente = Cliente.idCliente
 GO
 
